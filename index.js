@@ -27,6 +27,10 @@ io.on('connection', (socket) => {
     outputStream.on('data', chunk => {
       socket.emit('output', chunk.toString());
     });
+
+     const inputStream = new stream.PassThrough();
+      inputStream.end(input);
+
     docker.run(
       'python:3.10',                      
       ['python', `/app/temp/${fileName}`], 
